@@ -1,0 +1,8 @@
+{
+    "irods_home": "/<zone>/<organisation>/<project>",
+    "irods_user_name": "<username>",
+    "irods_host": "<host>",
+    "irods_zone": "<zone>",
+    "irods_port": <port>,
+    "irods_authentication_scheme": "native"
+}
