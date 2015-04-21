@@ -1,8 +1,8 @@
 {
-    "irods_home": "/<zone>/<organisation>/<project>",
+    "irods_home": "/ida",
     "irods_user_name": "<username>",
-    "irods_host": "<host>",
-    "irods_zone": "<zone>",
-    "irods_port": <port>,
+    "irods_host": "ida.csc.fi",
+    "irods_zone": "ida",
+    "irods_port": 1247,
     "irods_authentication_scheme": "native"
 }
