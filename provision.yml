@@ -1,18 +1,47 @@
 ---
-
 - hosts: localhost
 
   tasks:
-   # install icommands from remote .rpm
-   - yum: name=ftp://ftp.renci.org/pub/irods/releases/4.0.3/irods-icommands-4.0.3-64bit-centos6.rpm state=present
+  - name: "install dependencies"
+    yum: name={{ item }} 
+         state=present
+    with_items:
+      - gcc-c++ 
+      - make 
+      - python-devel 
+      - rpm-build 
+      - wget 
+      - help2man 
+      - unixODBC 
+      - fuse-devel 
+      - curl-devel 
+      - bzip2-devel 
+      - zlib-devel 
+      - pam-devel 
+      - openssl-devel 
+      - libxml2-devel 
+      - krb5-devel
 
-   # create icommands user
-   - user: name="iuser" uid=1000 password="iuser"
+  - name: "get iRODS release from GitHub"
+    get_url: url=https://github.com/irods/irods/archive/4.0.3.tar.gz dest=/tmp/irods.tgz
+  - name: create tmp directory
+    file: path="/tmp/irods" state=directory mode=755
+  - name: unarchive
+    unarchive: src=/tmp/irods.tgz dest=/tmp/irods
 
-   - file: path="/home/iuser/.irods" 
+  - name: "build rpm"
+    shell: cd /tmp/irods/irods*; ./packaging/build.sh icommands
+
+  - name: "install rpm"
+    shell: yum localinstall -y /tmp/irods/irods-4.0.3/build/*rpm
+               
+  - name: "create icommands user"
+    user: name="iuser" uid=1000 password="iuser"
+
+  - file: path="/home/iuser/.irods" 
            mode=755 
            state=directory
 
-   - template: src=irods_environment.json
+  - template: src=irods_environment.json
                dest="/home/iuser/.irods/irods_environment.json"
                owner="iuser"
