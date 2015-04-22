@@ -1,0 +1,16 @@
+---
+              
+- name: "create icommands user"
+  user: name="iuser" uid=1000 password="iuser"
+
+- file: path="/home/iuser/.irods" 
+        mode=755 
+        state=directory
+
+- template: src=irods_environment.json
+            dest="/home/iuser/.irods/irods_environment.json"
+            owner="iuser"
+
+- template: src=irodsEnv
+            dest="/home/iuser/.irods/.irodsEnv"
+            owner="iuser"
