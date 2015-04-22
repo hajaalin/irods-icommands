@@ -1,0 +1,8 @@
+---
+- name: install iRODS icommands
+  hosts: localhost
+
+  roles:
+    - icommands_from_source
+    - icommands_user
+
