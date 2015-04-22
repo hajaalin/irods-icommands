@@ -1,7 +1,7 @@
-irodsHost=
-irodsPort=
+irodsHost=ida.csc.fi
+irodsPort=1247
 irodsUserName=
-irodsZone=
-irodsHome=
-irodsCwd=
+irodsZone=ida
+irodsHome=/ida/
+irodsCwd=/ida/
 
